@@ -1,0 +1,23 @@
+# Constants
+
+Project state flags and configuration values used by skills.
+
+## Identity
+COMPANY_NAME = [CompanyName]
+PROJECT_NAME = [ProjectName]
+
+## Project Profile
+SCOPE = [SCOPE]
+STATE = greenfield
+OWNERSHIP = [OWNERSHIP]
+WORKFLOW = [WORKFLOW]
+
+## Features
+CONTEXT_SYSTEM = [CONTEXT_SYSTEM]
+TESTS = [TESTS]
+ZENJECT = [ZENJECT]
+
+## MCP
+MCP_TOOL = https://github.com/IvanMurzak/Unity-MCP
+SCRIPT_EXECUTOR_PATH = Assets/_Core/Editor/Scripts/AutomationHelpers/ScriptExecutor.cs
+SCRIPT_EXECUTOR_NAMESPACE = [CompanyName].Core.Editor

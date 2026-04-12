@@ -1,0 +1,5 @@
+
+# Claude Code local files
+.claude/*.local.*
+.claude/Temp/
+CLAUDE.local.md

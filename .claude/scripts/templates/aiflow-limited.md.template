@@ -1,0 +1,18 @@
+# AI Development Flow
+
+This project uses **limited AI assistance** — convention skills only.
+
+## How It Works
+
+The AI follows project coding conventions when you ask it to write code. There is no project specification, architecture tracking, context system, or planning structure. You manage the project yourself.
+
+## What's Available
+
+Convention skills auto-load when relevant — you don't need to invoke them:
+[CONVENTIONS_LIST]
+
+## Key File
+
+| File | Purpose |
+|------|---------|
+| `.claude/State/Constants.md` | Project configuration |

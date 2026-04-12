@@ -1,0 +1,70 @@
+# AI Development Flow
+
+This project uses **agent-driven** development[If CONTEXT_SYSTEM != none]: with inline context system[/If].
+
+## How It Works
+
+Development is organized into **Iterations** (milestones) → **Tasks** (user-story level) → **Subtasks** (atomic units the agent handles one at a time).
+
+The agent picks up the next task, breaks it into subtasks, and works through all subtasks autonomously using a dedicated subagent per subtask. It stops at task boundaries for your manual testing and feedback. You stay in control of pacing and direction.
+
+### Commands
+
+| Command | What it does |
+|---------|-------------|
+| `/unity-claude:unity-development progress` | Work on the next subtask in the current iteration. This is the main development loop. |
+| `/unity-claude:unity-development <request>` | Freeform — ask for anything (ad-hoc work, exploration, refactoring). |
+| `/unity-claude:unity-development sync` | Update context and state after you make manual changes outside the AI workflow. |
+
+### What a Progress Session Looks Like
+
+1. **Reconciliation** — Agent checks for changes since the last session (manual commits, freeform work). Updates context and state if needed.
+2. **Determine work** — Agent reads the current iteration. If tasks aren't broken down yet, it proposes a breakdown and discusses with you.
+[If TESTS = true]
+[If CONTEXT_SYSTEM != none]
+3. **Execute subtasks** — Each subtask is handled by a dedicated subagent that plans, implements, validates (compile + tests), updates context, and commits. Subtasks run autonomously without stopping for feedback.
+[EndIf]
+[If CONTEXT_SYSTEM = none]
+3. **Execute subtasks** — Each subtask is handled by a dedicated subagent that plans, implements, validates (compile + tests), and commits. Subtasks run autonomously without stopping for feedback.
+[EndIf]
+[EndIf]
+[If TESTS = false]
+[If CONTEXT_SYSTEM != none]
+3. **Execute subtasks** — Each subtask is handled by a dedicated subagent that plans, implements, validates (compile), updates context, and commits. Subtasks run autonomously without stopping for feedback.
+[EndIf]
+[If CONTEXT_SYSTEM = none]
+3. **Execute subtasks** — Each subtask is handled by a dedicated subagent that plans, implements, validates (compile), and commits. Subtasks run autonomously without stopping for feedback.
+[EndIf]
+[EndIf]
+4. **Task completion** — When all subtasks are done, the agent prompts you for manual gameplay/visual testing, reviews architecture and spec, does task-level wrap-up, and stops.
+5. **Continue** — Run `progress` again for the next task.
+
+When all tasks in an iteration are done, the agent advances to the next iteration.
+
+### What the Agent Does Automatically
+
+Every commit, the agent:
+[If CONTEXT_SYSTEM != none]
+- Updates inline context summaries for all created/modified files
+[EndIf]
+- Reviews Architecture.md and ProjectSpecification.md for needed updates
+[If TESTS = true]
+- Writes tests alongside implementation
+[EndIf]
+- Follows project coding conventions
+
+## Key Files
+
+| File | Purpose |
+|------|---------|
+| `.claude/State/Constants.md` | Project configuration and feature flags |
+| `.claude/State/Architecture.md` | System architecture — subsystems, folder mappings, technical decisions |
+| `.claude/State/ProjectSpecification.md` | Formalized game specification |
+| `.claude/Planning/ProjectPlan.md` | Iteration roadmap |
+| `.claude/Planning/CurrentIteration.md` | Active iteration with tasks and subtasks |
+| `.claude/Planning/IterationHistory.md` | Summaries of completed iterations |
+
+## Active Conventions
+
+Convention skills auto-load when relevant — you don't need to invoke them:
+[CONVENTIONS_LIST]

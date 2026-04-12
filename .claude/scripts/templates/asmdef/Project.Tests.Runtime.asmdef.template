@@ -1,0 +1,23 @@
+{
+    "name": "[ProjectName].Tests.Runtime",
+    "rootNamespace": "[CompanyName].[ProjectName].Tests.Runtime",
+    "references": [
+        "[ProjectName]",
+        "Core",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "Zenject",
+        "Zenject.TestFramework"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": ["UNITY_INCLUDE_TESTS"],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

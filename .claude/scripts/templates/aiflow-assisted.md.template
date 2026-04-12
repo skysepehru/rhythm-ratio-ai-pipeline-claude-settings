@@ -1,0 +1,62 @@
+# AI Development Flow
+
+This project uses **agent-assisted** development[If CONTEXT_SYSTEM != none]: with inline context system[/If].
+
+## How It Works
+
+You lead development. The AI implements what you ask, with full project awareness. There is no task/subtask structure — you decide what to work on each session.
+
+### Commands
+
+| Command | What it does |
+|---------|-------------|
+| `/unity-claude:unity-development <request>` | Ask the AI to implement something. Describe what you want. |
+| `/unity-claude:unity-development sync` | Update context and state after you make manual changes outside the AI workflow. Run this often — the AI needs accurate state to help you well. |
+
+### What a Session Looks Like
+
+1. **Context retrieval** — Agent loads architecture, spec, and relevant file summaries.
+[If TESTS = true]
+2. **Implement** — Agent writes code and tests per your request.
+3. **Validate** — Compile check, run tests, then prompt you for manual testing.
+[EndIf]
+[If TESTS = false]
+2. **Implement** — Agent writes code per your request.
+3. **Validate** — Compile check, then prompt you for manual testing.
+[EndIf]
+[If CONTEXT_SYSTEM != none]
+4. **Update state** — Agent updates context for modified files. Reviews Architecture.md and ProjectSpecification.md for needed updates (mandatory every commit).
+[EndIf]
+[If CONTEXT_SYSTEM = none]
+4. **Update state** — Reviews Architecture.md and ProjectSpecification.md for needed updates (mandatory every commit).
+[EndIf]
+5. **Commit** — Done.
+
+### What the Agent Does Automatically
+
+Every commit, the agent:
+[If CONTEXT_SYSTEM != none]
+- Updates inline context summaries for all created/modified files
+[EndIf]
+- Reviews Architecture.md and ProjectSpecification.md for needed updates
+[If TESTS = true]
+- Writes tests alongside implementation
+[EndIf]
+- Follows project coding conventions
+
+### Important: Sync After Manual Work
+
+Since you do significant work outside the AI workflow, run `/unity-claude:unity-development sync` after making manual changes. This updates context and state so the AI stays accurate.
+
+## Key Files
+
+| File | Purpose |
+|------|---------|
+| `.claude/State/Constants.md` | Project configuration and feature flags |
+| `.claude/State/Architecture.md` | System architecture — subsystems, folder mappings, technical decisions |
+| `.claude/State/ProjectSpecification.md` | Formalized game specification |
+
+## Active Conventions
+
+Convention skills auto-load when relevant — you don't need to invoke them:
+[CONVENTIONS_LIST]

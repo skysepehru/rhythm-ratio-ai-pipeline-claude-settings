@@ -1,0 +1,15 @@
+/* @context
+summary: Metadata component for AI context system. Attach to GameObjects to provide summaries queryable via MCP.
+tags: context, infrastructure
+*/
+
+using UnityEngine;
+
+namespace [CompanyName].Core
+{
+    public class ContextInfo : MonoBehaviour
+    {
+        [TextArea(3, 10)]
+        public string Summary;
+    }
+}

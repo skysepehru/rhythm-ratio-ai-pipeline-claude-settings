@@ -1,0 +1,19 @@
+# Constants
+
+Project state flags and configuration values used by skills.
+
+## Identity
+COMPANY_NAME = [CompanyName]
+PROJECT_NAME = [ProjectName]
+
+## Project Profile
+SCOPE = unknown
+STATE = existing
+OWNERSHIP = solo
+WORKFLOW = limited
+
+## Features
+ZENJECT = [ZENJECT]
+
+## MCP
+MCP_TOOL = https://github.com/IvanMurzak/Unity-MCP
